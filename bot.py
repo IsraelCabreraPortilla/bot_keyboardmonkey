@@ -3,7 +3,6 @@ from telegram.ext import Updater, CommandHandler
 import os 
 import telegram
 import random
-import time,webbrowser, pyautogui
 import requests
 import pandas as pd
 import requests
