@@ -6,7 +6,6 @@ import random
 import requests
 import pandas as pd
 import requests
-import sys
 
 #Configure Logging
 logging.basicConfig(
