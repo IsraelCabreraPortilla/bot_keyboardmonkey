@@ -3,9 +3,13 @@ from telegram.ext import Updater, CommandHandler
 import os 
 import telegram
 import random
+import time,webbrowser, pyautogui
 import requests
 import pandas as pd
 import requests
+import sys
+
+
 
 #Configure Logging
 logging.basicConfig(
@@ -34,7 +38,7 @@ def get_info(update, context):
     name = update.effective_user['first_name']
     print(type(chat_id))
     title = update.effective_chat['title']  
-    cookie = "CF_Authorization=eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwOWZkNjIxYTNmOWRhZDRlNmIwZTI5MzhlNmZhMWQ0OTU5YjNjYzYxZmE3MzYyZGU0YWM0ZDMxNWJiNzY3ODcifQ.eyJhdWQiOlsiMTFlNGY1NTkyOWYwN2M1ZDM2ZWY4ZWI0ZGI5YTUzM2FmZDY3ZDdjODUyMzRiODJmNTFlYzQ2MDQzNDQ5YWI5MSJdLCJlbWFpbCI6InlhcmEucGluZWRhQG9zbC5jb20iLCJleHAiOjE2NTY5NTMzNDYsImlhdCI6MTY1NjM0ODU0NiwibmJmIjoxNjU2MzQ4NTQ2LCJpc3MiOiJodHRwczovL2JjZ3JvdXAuY2xvdWRmbGFyZWFjY2Vzcy5jb20iLCJ0eXBlIjoiYXBwIiwiaWRlbnRpdHlfbm9uY2UiOiI4VTdYRm1WVkhJemJFUDd4Iiwic3ViIjoiYmRiYTNjMTYtNWE4Yy00OTIxLTliODktYmJlM2IxNmQ4MDg0IiwiY291bnRyeSI6Ik1YIn0.o4oOjrJAmJmt7qUYM7lzkkqTflGpdispdAE9WITDaBScPd5XxHEsElan40wGIuKtsGycbNAt8VfiiATYveSKTGXTk0feyZDYfg8WdGpKEGqRC0CIKipVvN5-MhrJXengn43kOJZwtz5kgyR0g4I07aXdYXXrjp1aXkHa_7ykmdkWXDIvDrbt-7lY13aA8Nvc_IN8KrnoGCdYP-KJo_Pn_Cpfq6Sv2EHlWB1-d86x4z-gXVQESqlp8JPp-89IEgcXYphENTnl1ZOZoovLySRlQPDGyjuDpTP4SaIVq3bhvfthbAFwdypqhLRNmYb0cfWIkcgQkz_FgJop95YEaoN4Rg; AuthToken=eyJhbGciOiJFUzI1NiJ9.eyJwZXJtaXNzaW9ucyI6WyJVU1IwMCIsIkRCQTAwIiwiREJUMDAiLCJEQlAwMCIsIlVTRTAwIiwiVFBSMDAiLCJEQkUwMCIsIkRCQzAxIiwiQ1NVMDAiLCJBQUgwMCIsIlJBSDAwIiwiUkFIMDEiLCJSVEEwMCIsIkNOQzAwIiwiQVRBMDIiLCJBVEEwNSIsIkFUQTA3IiwiQVRBMDkiLCJVVEEwMCIsIlRBUjAxIiwiT1RDMDAiLCJUQ1MwMCIsIlRDUzAxIiwiV1dMMDAiLCJXV0wwMyIsIk9UQzA0Il0sInVzZXJVdWlkIjoiMjdiNWQzZTAtMzdiZS00ZmFkLWE4ZGQtZTNhNmU5NWNkYzhhIiwibG9nZ2VkSW5XaXRoVHdvRmFjdG9yIjp0cnVlLCJzaXRlR3JvdXAiOiJPUFNfR1JPVVAiLCJleHAiOjE2NTY0NDg3MzQsInRFeHAiOjE2NTY0NDg3MzQsInZlcmlmaWNhdGlvblN0YXRlIjoiVU5WRVJJRklFRCIsImlhdCI6MTY1NjQ0MTUzNCwib3BTaXRlcyI6WyJfT1NMU0dfQ09NIiwiX09TTF9DT00iLCJfT1NMQU1fQ09NIl0sInVzZXJuYW1lIjoieWFyYS5waW5lZGFAb3NsLmNvbSJ9.VZzgd5AQppETCMxL-1ERnKC7FrFwIbTm33SSppAM0fIg0Wtsc33gLrIH0sAqotosOjkEIlQb80Hy51reX1R99g"  
+    cookie = COOKIE
     #message = f"Hello {name} this is your currently status."
     headers_r = {
             'authority': 'trader.osl.ltd',
@@ -73,7 +77,9 @@ def get_info(update, context):
 
 if __name__=="__main__":
     #Obtenemos la informacion del Bot
-    my_bot = telegram.Bot(token=TOKEN)
+   COOKIE = str(input("COOKIE: "))
+   my_bot = telegram.Bot(token=TOKEN)
+    
     #print(my_bot.getMe())
 
 #Enlazamos nuestro updater con nuestro bot 
@@ -91,3 +97,4 @@ dp.add_handler(CommandHandler("getinfo",get_info))
 updater.start_polling()
 print("BOT CARGADO")
 updater.idle() #finalizar el bot ctrl+c
+
