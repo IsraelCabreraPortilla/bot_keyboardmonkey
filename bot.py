@@ -34,7 +34,7 @@ def random_number(update,context):
 def get_info(update, context):
     user_id = update.effective_user['id']
     chat_id = update.effective_chat['id']
-    if user_id == 384745955 or user_id==1441178034 or user_id==999564414 or user_id==5344111750 or user_id==999995878:
+    if user_id == 384745955 or user_id==1441178034 or user_id==999564414 or user_id==5344111750 or user_id==999995878 or user_id==1006249329:
 
         name = update.effective_user['first_name']
         title = update.effective_chat['title']  
