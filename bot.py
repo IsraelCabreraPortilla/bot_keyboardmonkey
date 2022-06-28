@@ -34,43 +34,46 @@ def random_number(update,context):
 def get_info(update, context):
     user_id = update.effective_user['id']
     chat_id = update.effective_chat['id']
-    name = update.effective_user['first_name']
-    print(type(chat_id))
-    title = update.effective_chat['title']  
-    cookie = COOKIE
-    #message = f"Hello {name} this is your currently status."
-    headers_r = {
-            'authority': 'trader.osl.ltd',
-            'accept': 'application/json, text/plain, */*',
-            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
-            'sec-fetch-site': 'same-origin',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-dest': 'empty',
-            'referer': 'https://trader.osl.ltd/dashboard',
-            'accept-language': 'en-US,en;q=0.9',
-            'cookie': cookie
-        }
-    transactions = requests.get('https://trader.osl.ltd/api/dashboard/accounts?uuid=dd6f15ef-ee94-4a8c-9d7c-ac8a71eed443&accountGroupUuid=dd6f15ef-ee94-4a8c-9d7c-ac8a71eed443', headers=headers_r)
-    data = pd.DataFrame.from_dict(transactions.json())
+    if user_id == 384745955 or user_id==1441178034 or user_id==999564414 or user_id==5344111750 or user_id==999995878:
 
-    for i in range(len(data)):
-            if(data['accounts'][i]['ccy']=="BTC"):
-                BTC_balance = data['accounts'][i]['balance']
+        name = update.effective_user['first_name']
+        title = update.effective_chat['title']  
+        cookie = COOKIE
+        #message = f"Hello {name} this is your currently status."
+        headers_r = {
+                'authority': 'trader.osl.ltd',
+                'accept': 'application/json, text/plain, */*',
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-dest': 'empty',
+                'referer': 'https://trader.osl.ltd/dashboard',
+                'accept-language': 'en-US,en;q=0.9',
+                'cookie': cookie
+            }
+        transactions = requests.get('https://trader.osl.ltd/api/dashboard/accounts?uuid=dd6f15ef-ee94-4a8c-9d7c-ac8a71eed443&accountGroupUuid=dd6f15ef-ee94-4a8c-9d7c-ac8a71eed443', headers=headers_r)
+        data = pd.DataFrame.from_dict(transactions.json())
 
-            if(data['accounts'][i]['ccy']=="ETH"):
-                ETH_balance = data['accounts'][i]['balance']
+        for i in range(len(data)):
+                if(data['accounts'][i]['ccy']=="BTC"):
+                    BTC_balance = data['accounts'][i]['balance']
 
-            if(data['accounts'][i]['ccy']=="USD"):
-                USD_balance = data['accounts'][i]['balance']
+                if(data['accounts'][i]['ccy']=="ETH"):
+                    ETH_balance = data['accounts'][i]['balance']
 
-            if(data['accounts'][i]['ccy']=="USDC"):
-                USDC_balance = data['accounts'][i]['balance']
+                if(data['accounts'][i]['ccy']=="USD"):
+                    USD_balance = data['accounts'][i]['balance']
 
-    message = f'''Hello Keyboard this is your status:
-        \n<b>BTC:</b> {BTC_balance}\n<b>ETH:</b> {ETH_balance}\n<b>USD:</b> {USD_balance}\n<b>USDC:</b> {USDC_balance}'''
-    
-    context.bot.sendMessage(chat_id = chat_id, parse_mode="HTML", text=message)
-    logger.info(f"El usuario {name}, ha solicitado su Info en el chat {title} (id = {chat_id} )")
+                if(data['accounts'][i]['ccy']=="USDC"):
+                    USDC_balance = data['accounts'][i]['balance']
+
+        message = f'''Hello Keyboard this is your status:
+            \n<b>BTC:</b> {BTC_balance}\n<b>ETH:</b> {ETH_balance}\n<b>USD:</b> {USD_balance}\n<b>USDC:</b> {USDC_balance}'''
+        
+        context.bot.sendMessage(chat_id = chat_id, parse_mode="HTML", text=message)
+        logger.info(f"El usuario {name}, ha solicitado su Info en el chat {title} (id = {chat_id} )")
+    else:
+        context.bot.sendMessage(chat_id = chat_id, parse_mode="HTML", text="You dont have access to this command")
 
 
 
